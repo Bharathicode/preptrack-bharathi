@@ -21,14 +21,19 @@ while True:
 
 registration_number = input("Enter registration number: ")
 graduation_year = int(input("Enter graduation year: "))
+graduation_eligible = (graduation_year >= 2025 and graduation_year <= 2027)
+while True:
+    attendance = float(input("Enter attendance percentage: "))
+    if attendance >= 0 and attendance <= 100:
+        break
+    else:
+        print("Attendance must be between 0 and 100")
+project_input = input("Enter yes or no: ")
+if project_input =="yes":
+    project_completed = True
+else:
+    project_completed = False
 
-# TODO: Validate attendance between 0 and 100.
-attendance = float(input("Enter attendance percentage: "))
-
-# TODO: Accept only yes or no.
-project_input = input(
-    "Has the student completed the required project? Enter yes or no: "
-)
 
 # TODO: Convert project_input into True or False.
 project_completed = False
