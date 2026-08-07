@@ -22,27 +22,29 @@ while True:
         
 
 while True:
-    project_input = input("Project Completed: ")
-    if project_input =="yes":
-        project_completed = True
-        break
-    elif project_input =="no":
-        project_completed = False
+    project_input = input("Project Completed(yes/no): ")
+    if project_input =="yes" or project_input =="no":
         break
     else:
         print("Please enter only yes or no")
+
+if project_input =="yes":
+    project_completed = True
+else:
+    project_completed = False
 
 
 while True:
-    profile_input = input("Profile Verified: ")
-    if profile_input == "yes":
-        profile_verified = True
-        break
-    elif profile_input == "no":
-        profile_verified = False
+    profile_input = input("Profile Verified(yes/no): ")
+    if profile_input == "yes" or profile_input == "no":
         break
     else:
         print("Please enter only yes or no")
+
+if profile_input == "yes":
+    profile_verified = True
+else:
+    profile_verified = False
 
 
 total_score = 0
@@ -60,7 +62,7 @@ critical_days = 0
 highest_score = 0
 highest_score_day = 0
 
-lowest_score = 100
+lowest_score = 0
 lowest_score_day = 0
 
 first_attempt_found = False
@@ -82,12 +84,33 @@ for day in range(1, 8):
 
     if score == -1:
         absent_days += 1
-        print(f"Day {day} Result: Absent")
+        print(f"Day {day} Result: Absent\n")
         continue
 
     attempted_days += 1
     total_score += score
 
+    # calculate  based on score 
+    if score >= 75 and score <=100:
+        strong_days += 1
+        print(f"Day {day} Result: Strong\n")
+    elif score >= 60 and score <=74:
+        satisfactory_days += 1
+        print(f"Day {day} Result: Satisfactory\n")
+    elif score >= 40 and score <=59:
+        improvement_days += 1
+        print(f"Day {day} Result: Improvement\n")
+    else:
+        critical_days += 1
+        print(f"Day {day} Result: Critical\n")
+
+    # check passed or failed
+    if score >= 60 and score <= 100:
+        passed_days += 1
+    else:
+        failed_days += 1
+
+    # highest and lowest score
     if not first_attempt_found:
         highest_score = score
         highest_score_day = day
@@ -105,36 +128,19 @@ for day in range(1, 8):
             lowest_score = score
             lowest_score_day = day
 
-    if score >= 75 and score <=100:
-        strong_days += 1
-    elif score >= 60 and score <=74:
-        satisfactory_days += 1
-    elif score >= 40 and score <=59:
-        improvement_days += 1
-    else:
-        critical_days += 1
-
-
-    if score >= 60 and score <= 100:
-        passed_days += 1
-    else:
-        failed_days += 1
-
-
     if score < 40:
-        critical_days += 1
-
         if not critical_score_found:
             critical_score_found = True
             first_critical_day = day
             first_critical_score = score
 
-
+# calculate average score
 if attempted_days > 0:
     average_score = total_score / attempted_days
 else:
     average_score = 0
 
+# calculate eligibility
 graduation_eligible = (graduation_year >= 2025 and graduation_year <= 2027)
 
 attendance_eligible = attendance >= 75
@@ -153,6 +159,10 @@ placement_ready = (
     and project_completed
     and profile_verified
 )
+
+final_status = ""
+primary_blocker = ""
+next_action = ""
 
 
 if attempted_days == 0:
@@ -185,7 +195,7 @@ elif attendance < 75:
     primary_blocker = "Attendance below 75%"
     next_action = "Improve attendance to at least 75%"
 
-elif graduation_year < 2025 or graduation_year > 2027:
+elif not graduation_eligible:
     final_status = "Not Ready for Mock Interview"
     primary_blocker = "Graduation year not eligible"
     next_action = "Ensure graduation year is between 2025 and 2027"
@@ -200,10 +210,15 @@ elif not profile_verified:
     primary_blocker = "Profile not verified"
     next_action = "Verify the student profile"
 
-else:
+elif placement_ready:
     final_status = "Ready for Mock Interview"
-    primary_blocker = "N/A"
-    next_action = "N/A"
+    primary_blocker = "No major blocker"
+    next_action = "Schedule to Mock Interview"
+
+else:
+    final_status = "Status Update Pending"
+    primary_blocker = "Codition missed"
+    next_action = "Review eligibilty conditions"
 
 
 print()
@@ -211,9 +226,7 @@ print("=" * 50)
 print("              PREPTRACK REPORT")
 print("=" * 50)
 
-print()
-print("STUDENT INFORMATION")
-print()
+print("\nSTUDENT INFORMATION\n")
 
 print(f"Student Name           : {student_name}")
 print(f"Registration Number    : {registration_number}")
@@ -222,9 +235,7 @@ print(f"Attendance             : {attendance}%")
 print(f"Project Completed      : {project_completed}")
 print(f"Profile Verified       : {profile_verified}")
 
-print()
-print("PRACTICE SUMMARY")
-print()
+print("\nPRACTICE SUMMARY\n")
 
 print(f"Total Practice Days    : 7")
 print(f"Attempted Days         : {attempted_days}")
@@ -238,40 +249,37 @@ print(f"Satisfactory Days      : {satisfactory_days}")
 print(f"Needs Improvement Days : {improvement_days}")
 print(f"Critical Days          : {critical_days}")
 
-print()
-print("PERFORMANCE ANALYSIS")
-print()
+print("\nPERFORMANCE ANALYSIS\n")
 
 print(f"Total Score            : {total_score}")
 print(f"Average Score          : {average_score:.2f}")
-if attempted_days > 0:
-    print(f"Highest Score          : {highest_score}")
-    print(f"Highest Score Day      : Day {highest_score_day}")
-    print(f"Lowest Score           : {lowest_score}")
-    print(f"Lowest Score Day       : Day {lowest_score_day}")
+if attempted_days == 0:
+    highest_score_display = "Not Attempted"
+    lowest_score_display = "Not Attempted"
+    highest_score_day_display = "Not Attempted"
+    lowest_score_day_display = "Not Attempted"
 else:
-    print("No practice attempted yet.")
-    highest_score = 0
-    lowest_score = 0
-    highest_score_day = 0
-    lowest_score_day = 0
+    highest_score_display = highest_score
+    lowest_score_display = lowest_score
+    highest_score_day_display = highest_score_day
+    lowest_score_day_display = lowest_score_day
 
-print()
-print("CRITICAL SCORE INFORMATION")
-print()
+print(f"Highest Score          : {highest_score_display}")
+print(f"Highest Score Day      : Day {highest_score_day_display}")
+print(f"Lowest Score           : {lowest_score_display}")
+print(f"Lowest Score Day       : Day {lowest_score_day_display}")
 
+print("\nCRITICAL SCORE INFORMATION\n")
+
+print(f"Critical Score Found   : {critical_score_found}")
 if critical_score_found:
-    print(f"Critical Score Found   : Yes")
     print(f"First Critical Day     : Day {first_critical_day}")
     print(f"First Critical Score   : {first_critical_score}")
 else:
-    print(f"Critical Score Found   : No")
-    print(f"First Critical Day     : N/A")
-    print(f"First Critical Score   : N/A")
+    print(f"First Critical Day     : Not Attempted")
+    print(f"First Critical Score   : Not Attempted")
 
-print()
-print("FINAL DECISION")
-print()
+print("\nFINAL DECISION\n")
 
 print(f"Final Status           : {final_status}")
 print(f"Primary Blocker        : {primary_blocker}")
