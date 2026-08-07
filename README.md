@@ -95,10 +95,11 @@ The application was thoroughly verified across multiple edge cases and test scen
 
 ## Code Review Completed
 
-- **Reviewer**: 
-- **Review Date**: 
-- **Review Status**: 
-- **Summary**: 
+- **Reviewed Member**: 
+- **Repository link**: 
+- **What was done well**: 
+- **Issued Identified**:
+- **Suggested Improvement**:
 
 ---
 
