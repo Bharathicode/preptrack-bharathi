@@ -95,25 +95,25 @@ The application was thoroughly verified across multiple edge cases and test scen
 
 ## Code Review Completed
 
-- **Reviewed Member**: 
-- **Repository link**: 
-- **What was done well**: 
-- **Issued Identified**:
-- **Suggested Improvement**:
+- **Reviewed Member**: Mohan Prakash
+- **Repository link**: https://github.com/mohan07-prog/preptrack-mohan
+- **What was done well**: The score-validation loop correctly asks again after invalid input.
+- **Issued Identified**: For the student name if I gave empty it will also accepted.
+- **Suggested Improvement**: should be used while loop for validate the input student name.
 
 ---
 
 ## Feedback Received
 
-Reviewed By:
+Reviewed By: yaswanth Reddy
 
-Feedback Received:
+Feedback Received: Improving the final report by handling cases where no practice days were attempted, so that highest score, lowest score, and critical score details display meaningful messages instead of default values.
 
-Was the Feedback Valid? Yes / No
+Was the Feedback Valid? Yes
 
-Change Made:
+Change Made: I updated the final report to display appropriate messages such as "Not Available" and "Not Applicable" when no practice score was attempted.
 
-Commit Message Used:
+Commit Message Used: "Complete PrepTrack project and documentation"
 
 ---
 

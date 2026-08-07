@@ -90,7 +90,7 @@ for day in range(1, 8):
     attempted_days += 1
     total_score += score
 
-    # calculate  based on score 
+    # Evaluate days based on score 
     if score >= 75 and score <=100:
         strong_days += 1
         print(f"Day {day} Result: Strong\n")
@@ -140,9 +140,8 @@ if attempted_days > 0:
 else:
     average_score = 0
 
-# calculate eligibility
+# calculate Placement eligiblity
 graduation_eligible = (graduation_year >= 2025 and graduation_year <= 2027)
-
 attendance_eligible = attendance >= 75
 practice_count_eligible = attempted_days >= 6
 average_eligible = average_score >= 70
@@ -254,10 +253,10 @@ print("\nPERFORMANCE ANALYSIS\n")
 print(f"Total Score            : {total_score}")
 print(f"Average Score          : {average_score:.2f}")
 if attempted_days == 0:
-    highest_score_display = "Not Attempted"
-    lowest_score_display = "Not Attempted"
-    highest_score_day_display = "Not Attempted"
-    lowest_score_day_display = "Not Attempted"
+    highest_score_display = "Not Applicable"
+    lowest_score_display = "Not Applicable"
+    highest_score_day_display = "Not Applicable"
+    lowest_score_day_display = "Not Applicable"
 else:
     highest_score_display = highest_score
     lowest_score_display = lowest_score
@@ -276,8 +275,8 @@ if critical_score_found:
     print(f"First Critical Day     : Day {first_critical_day}")
     print(f"First Critical Score   : {first_critical_score}")
 else:
-    print(f"First Critical Day     : Not Attempted")
-    print(f"First Critical Score   : Not Attempted")
+    print(f"First Critical Day     : Not Applicable")
+    print(f"First Critical Score   : Not Applicable")
 
 print("\nFINAL DECISION\n")
 
